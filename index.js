@@ -32,7 +32,6 @@ const foo = async () => {
     const name = await rlInstance.question('Name?');
     console.log(`Your name is ${name}`)
     process.exit(0)
-
 }
 
 void foo();
