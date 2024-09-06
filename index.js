@@ -12,8 +12,8 @@ const foo = async () => {
 
         await Promise.all(folderNames.map(async (folder) => {
             const folderPath = path.join(pathToDir, folder);
-            await fs.mkdir(folderPath, {recursive: true});
-
+            const ddd = await fs.mkdir(folderPath, {recursive: true});
+            console.log(ddd)
             await Promise.all(fileNames.map(async (file) => {
                 const filePath = path.join(folderPath, file);
                 await fs.writeFile(filePath, 'Hello World!');
