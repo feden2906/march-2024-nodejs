@@ -29,7 +29,7 @@ app.post('/users', async (req, res) => {
         }
         const users = await read();
 
-        const id = users[users.length - 1].id + 1;
+        const id = users.length ? users[users.length - 1]?.id + 1 : 1;
         const newUser = {id, name, email, password};
         users.push(newUser);
 
@@ -107,3 +107,4 @@ app.delete('/users/:userId', async (req, res) => {
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 });
+
