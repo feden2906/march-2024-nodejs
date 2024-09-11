@@ -1,1 +1,14 @@
-[{"id":1,"name":"Tamara 2","email":"qwe@test.com","password":"qwe213"},{"id":2,"name":"Tamara 2","email":"qwe@test.com","password":"qwe213"}]
+[
+  {
+    "id": 1,
+    "name": "Tamara 2",
+    "email": "qwe@test.com",
+    "password": "qwe213"
+  },
+  {
+    "id": 2,
+    "name": "Tamara 2",
+    "email": "qwe@test.com",
+    "password": "qwe213"
+  }
+]
