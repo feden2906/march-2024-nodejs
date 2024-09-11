@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-import { IUser } from "./interfaces/user.interface";
+import { IUser } from "../interfaces/user.interface";
 
 const read = async (): Promise<IUser[]> => {
   try {
