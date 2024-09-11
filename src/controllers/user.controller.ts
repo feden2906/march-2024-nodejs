@@ -32,6 +32,27 @@ class UserController {
       next(e);
     }
   }
+
+  public async updateById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = Number(req.params.userId);
+      const dto = req.body as IUser;
+      const result = await userService.updateById(userId, dto);
+      res.json(result);
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  public async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const userId = Number(req.params.userId);
+      await userService.deleteById(userId);
+      res.sendStatus(204);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const userController = new UserController();
