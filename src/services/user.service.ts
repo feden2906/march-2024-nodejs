@@ -26,7 +26,7 @@ class UserService {
     return await userRepository.create(dto);
   }
 
-  public async getById(userId: number): Promise<IUser> {
+  public async getById(userId: string): Promise<IUser> {
     const user = await userRepository.getById(userId);
     if (!user) {
       throw new ApiError("User not found", 404);
@@ -34,7 +34,7 @@ class UserService {
     return user;
   }
 
-  public async updateById(userId: number, dto: IUser): Promise<IUser> {
+  public async updateById(userId: string, dto: IUser): Promise<IUser> {
     if (!dto.name || dto.name.length < 3) {
       throw new ApiError(
         "Name is required and should be at least 3 characters long",
@@ -53,7 +53,7 @@ class UserService {
     return await userRepository.updateById(userId, dto);
   }
 
-  public async deleteById(userId: number): Promise<void> {
+  public async deleteById(userId: string): Promise<void> {
     return await userRepository.deleteById(userId);
   }
 }

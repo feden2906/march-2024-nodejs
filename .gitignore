@@ -3,3 +3,4 @@ node_modules
  25900.pdf
 
 dist
+.env
