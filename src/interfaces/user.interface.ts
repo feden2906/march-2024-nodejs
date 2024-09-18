@@ -13,3 +13,5 @@ export interface IUser {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export type ISignIn = Pick<IUser, "email" | "password">

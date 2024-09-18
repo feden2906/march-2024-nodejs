@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 
 import { configs } from "./config/configs";
 import { ApiError } from "./errors/api-error";
+import { authRouter } from "./routers/auth.router";
 import { userRouter } from "./routers/user.router";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 // app.use("/cars", carRouter);
 
