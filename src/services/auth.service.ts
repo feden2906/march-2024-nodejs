@@ -46,6 +46,8 @@ class AuthService {
     return { user, tokens };
   }
 
+  // TODO add refresh token service
+
   private async isEmailExistOrThrow(email: string): Promise<void> {
     const user = await userRepository.getByEmail(email);
     if (user) {

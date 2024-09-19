@@ -23,6 +23,8 @@ class AuthController {
       next(e);
     }
   }
+
+  // TODO add refresh token controller
 }
 
 export const authController = new AuthController();

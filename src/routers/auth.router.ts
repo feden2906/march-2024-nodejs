@@ -13,8 +13,10 @@ router.post(
 );
 router.post(
   "/sign-in",
-  // commonMiddleware.isBodyValid(UserValidator.create),
+  // commonMiddleware.isBodyValid(UserValidator.signIn),
   authController.signIn,
 );
+
+//TODO add refresh token route
 
 export const authRouter = router;
