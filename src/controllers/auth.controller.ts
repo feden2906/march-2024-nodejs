@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+import { ITokenPayload } from "../interfaces/token.interface";
 import { ISignIn, IUser } from "../interfaces/user.interface";
 import { authService } from "../services/auth.service";
 
@@ -24,7 +25,17 @@ class AuthController {
     }
   }
 
-  // TODO add refresh token controller
+  public async refresh(req: Request, res: Response, next: NextFunction) {
+    try {
+      const token = req.res.locals.refreshToken as string;
+      const jwtPayload = req.res.locals.jwtPayload as ITokenPayload;
+
+      const result = await authService.refresh(token, jwtPayload);
+      res.status(201).json(result);
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export const authController = new AuthController();
