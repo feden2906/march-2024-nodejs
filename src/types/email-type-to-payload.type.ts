@@ -11,4 +11,6 @@ export type EmailTypeToPayload = {
   >;
 
   [EmailTypeEnum.OLD_VISIT]: PickRequired<EmailPayloadCombined, "email">;
+
+  [EmailTypeEnum.LOGOUT]: PickRequired<EmailPayloadCombined, "name">;
 };

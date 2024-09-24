@@ -41,6 +41,7 @@ class EmailService {
   ): Promise<void> {
     const { subject, template } = emailConstants[type];
 
+    context["frontUrl"] = configs.APP_FRONT_URL;
     const options = { to, subject, template, context };
     await this.transporter.sendMail(options);
   }
