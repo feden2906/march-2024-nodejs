@@ -5,6 +5,8 @@ export interface IToken {
   accessToken: string;
   refreshToken: string;
   _userId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface ITokenPayload {

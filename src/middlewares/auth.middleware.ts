@@ -23,6 +23,9 @@ class AuthMiddleware {
         accessToken,
         TokenTypeEnum.ACCESS,
       );
+      // if (payload.role === "admin") {
+      //   next();
+      // }
 
       const pair = await tokenRepository.findByParams({ accessToken });
       if (!pair) {
