@@ -10,6 +10,7 @@ import {
   IUser,
 } from "../interfaces/user.interface";
 import { actionTokenRepository } from "../repositories/action-token.repository";
+import { oldPasswordRepository } from "../repositories/old-password.repository";
 import { tokenRepository } from "../repositories/token.repository";
 import { userRepository } from "../repositories/user.repository";
 import { emailService } from "./email.service";
@@ -159,7 +160,10 @@ class AuthService {
     jwtPayload: ITokenPayload,
     dto: IChangePassword,
   ): Promise<void> {
-    const user = await userRepository.getById(jwtPayload.userId);
+    const [user, oldPasswords] = await Promise.all([
+      userRepository.getById(jwtPayload.userId),
+      oldPasswordRepository.findByParams(jwtPayload.userId),
+    ]);
     const isPasswordCorrect = await passwordService.comparePassword(
       dto.oldPassword,
       user.password,
@@ -167,8 +171,26 @@ class AuthService {
     if (!isPasswordCorrect) {
       throw new ApiError("Invalid previous password", 401);
     }
+
+    const passwords = [...oldPasswords, { password: user.password }];
+    await Promise.all(
+      passwords.map(async (oldPassword) => {
+        const isPrevious = await passwordService.comparePassword(
+          dto.password,
+          oldPassword.password,
+        );
+        if (isPrevious) {
+          throw new ApiError("Password already used", 409);
+        }
+      }),
+    );
+
     const password = await passwordService.hashPassword(dto.password);
     await userRepository.updateById(jwtPayload.userId, { password });
+    await oldPasswordRepository.create({
+      _userId: jwtPayload.userId,
+      password: user.password,
+    });
     await tokenRepository.deleteManyByParams({ _userId: jwtPayload.userId });
   }
 }
