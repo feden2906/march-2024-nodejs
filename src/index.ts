@@ -1,4 +1,5 @@
 import express, { NextFunction, Request, Response } from "express";
+import fileUpload from "express-fileupload";
 import * as mongoose from "mongoose";
 
 import { configs } from "./config/configs";
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   console.log(`${req.method} ${req.path}`);
