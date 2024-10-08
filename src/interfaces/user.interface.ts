@@ -1,6 +1,7 @@
 import { OrderEnum } from "../enums/order.enum";
 import { RoleEnum } from "../enums/role.enum";
 import { UserListOrderByEnum } from "../enums/user-list-order-by.enum";
+import { PickRequired } from "../types/pick-required.type";
 
 export interface IUser {
   _id?: string;
@@ -35,15 +36,9 @@ export interface IUserListQuery {
 
 export type IUserResponse = Pick<
   IUser,
-  | "_id"
-  | "name"
-  | "email"
-  | "age"
-  | "role"
-  | "avatar"
-  | "isDeleted"
-  | "isVerified"
->;
+  "name" | "email" | "age" | "role" | "avatar" | "isDeleted" | "isVerified"
+> &
+  PickRequired<IUser, "_id" | "createdAt">;
 
 export interface IUserListResponse {
   data: IUserResponse[];

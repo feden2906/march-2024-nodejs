@@ -19,6 +19,7 @@ class UserPresenter {
         : null,
       isDeleted: entity.isDeleted,
       isVerified: entity.isVerified,
+      createdAt: entity.createdAt,
     };
   }
 
